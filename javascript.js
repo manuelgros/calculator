@@ -15,21 +15,21 @@ function divide(a, b) {
 // Variables and function for calculation
 let numberA
 let numberB
-let operator
+let operator = ""
 
-function operate(numberA, numberB, operator) {
-  return (operator == add) ? add(numberA, numberB)
-    : (operator == subtract) ? subtract(numberA, numberB)
-    : (operator == multiply) ? multiply(numberA, numberB)
-    : (operator == divide) ? divide(numberA, numberB)
+function operate(a, b, o) {
+  return (o == 'add') ? add(a, b)
+    : (o == 'subtract') ? subtract(a, b)
+    : (o == 'multiply') ? multiply(a, b)
+    : (o == 'divide') ? divide(a, b)
     : "Error";
 }
 
 // Display feature
 const display = document.querySelector("#display");
 display.textContent = ""
-const numberBtn = document.querySelectorAll(".numberKey");
 
+const numberBtn = document.querySelectorAll(".numberKey");
 for (i = 0; i < numberBtn.length; i++) {
   numberBtn[i].addEventListener('click', (e) => {
     display.textContent += e.target.id ;
@@ -44,3 +44,20 @@ function clearDisplay() {
 }
 
 clearBtn.addEventListener ('click', clearDisplay)
+
+// Operator buttons
+const operatorBtn = document.querySelectorAll(".operatorKey");
+for (i = 0; i < operatorBtn.length; i++) {
+  operatorBtn[i].addEventListener('click', (e) =>{
+    operator = e.target.id
+    numberA = +display.textContent;
+    clearDisplay();
+    console.log(operator);
+  })
+}
+
+const equalBtn = document.querySelector("#equal");
+equalBtn.addEventListener("click", () => {
+  numberB = display.textContent;
+  display.textContent = operate(+numberA, +numberB, operator);
+})
