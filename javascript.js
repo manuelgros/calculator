@@ -38,6 +38,9 @@ for (i = 0; i < numberBtn.length; i++) {
 
 // Clear buttom
 const clearBtn = document.querySelector('#clear');
-clearBtn.addEventListener ('click', () => {
+
+function clearDisplay() {
   display.textContent = "";
-})
+}
+
+clearBtn.addEventListener ('click', clearDisplay)
