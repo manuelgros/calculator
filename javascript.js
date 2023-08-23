@@ -1,5 +1,4 @@
 // Function for basic math operators
-
 function add(a, b) {
   return total = a + b;
 }
@@ -11,4 +10,17 @@ function multiply(a, b) {
 }
 function divide(a, b) {
   return total = a / b;
+}
+
+// Variables and function for calculation
+let numberA
+let numberB
+let operator
+
+function operate(numberA, numberB, operator) {
+  return (operator == add) ? add(numberA, numberB)
+    : (operator == subtract) ? subtract(numberA, numberB)
+    : (operator == multiply) ? multiply(numberA, numberB)
+    : (operator == divide) ? divide(numberA, numberB)
+    : "Error";
 }
