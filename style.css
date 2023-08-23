@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+#display {
+  display: flex;
+  height: 30px;
+  width: 333px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: larger;
+}
