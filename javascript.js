@@ -15,7 +15,7 @@ function divide(a, b) {
 // Variables and function for calculation
 let numberA
 let numberB
-let operator = ""
+let operator
 
 function operate(a, b, o) {
   return (o == 'add') ? add(a, b)
@@ -36,14 +36,22 @@ for (i = 0; i < numberBtn.length; i++) {
   })
 }
 
-// Clear buttom
+// Clear button
 const clearBtn = document.querySelector('#clear');
+
+function clearAll () {
+  display.textContent = "";
+  numberA = "";
+  numberB = "";
+  operator = "";
+}
 
 function clearDisplay() {
   display.textContent = "";
 }
 
-clearBtn.addEventListener ('click', clearDisplay)
+
+clearBtn.addEventListener ('click', clearAll);
 
 // Operator buttons
 const operatorBtn = document.querySelectorAll(".operatorKey");
@@ -56,8 +64,10 @@ for (i = 0; i < operatorBtn.length; i++) {
   })
 }
 
+//Equal button
 const equalBtn = document.querySelector("#equal");
 equalBtn.addEventListener("click", () => {
   numberB = display.textContent;
   display.textContent = operate(+numberA, +numberB, operator);
+  numberA = display.textContent;
 })
