@@ -24,3 +24,14 @@ function operate(numberA, numberB, operator) {
     : (operator == divide) ? divide(numberA, numberB)
     : "Error";
 }
+
+// Display feature
+const display = document.querySelector("#display");
+display.textContent = ""
+const numberBtn = document.querySelectorAll(".numberKey");
+
+for (i = 0; i < numberBtn.length; i++) {
+  numberBtn[i].addEventListener('click', (e) => {
+    display.textContent += e.target.id ;
+  })
+}
