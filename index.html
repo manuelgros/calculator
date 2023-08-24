@@ -9,32 +9,35 @@
 </head>
 
 <body>
-
-  <div id="mainBody">
-    <div id="display">1234</div>
-    <div id="numberPad">
-      <button class="numberKey" id="9">9</button>
-      <button class="numberKey" id="8">8</button>
-      <button class="numberKey" id="7">7</button>
-      <button class="numberKey" id="6">6</button>
-      <button class="numberKey" id="5">5</button>
-      <button class="numberKey" id="4">4</button>
-      <button class="numberKey" id="3">3</button>
-      <button class="numberKey" id="2">2</button>
-      <button class="numberKey" id="1">1</button>
-      <button class="numberKey" id="0">0</button>
-      <button class="numberKey" id="dot">.</button>
-      <button class="numberKey" id="clear">AC</button>
-    </div>
-    <div id="operatorPad">
-      <button class="operatorKey" id="add">+</button>
-      <button class="operatorKey" id="subtract">-</button>
-      <button class="operatorKey" id="multiply">*</button>
-      <button class="operatorKey" id="divide">/</button>
-      <button id="equal">=</button>
+  <div id="container">
+    <div id="mainBody">
+      <div id="display">1234</div>
+      <div id="buttons">
+        <div id="numberPad">
+          <button class="numberKey" id="9">9</button>
+          <button class="numberKey" id="8">8</button>
+          <button class="numberKey" id="7">7</button>
+          <button class="numberKey" id="6">6</button>
+          <button class="numberKey" id="5">5</button>
+          <button class="numberKey" id="4">4</button>
+          <button class="numberKey" id="3">3</button>
+          <button class="numberKey" id="2">2</button>
+          <button class="numberKey" id="1">1</button>
+          <button class="numberKey" id="0">0</button>
+          <button class="numberKey" id="dot">.</button>
+          <button class="numberKey" id="clear">AC</button>
+        </div>
+        <div id="operatorPad">
+          <button class="operatorKey secondaryKey" id="add">+</button>
+          <button class="operatorKey secondaryKey" id="subtract">-</button>
+          <button class="operatorKey secondaryKey" id="multiply">*</button>
+          <button class="operatorKey secondaryKey" id="divide">/</button>
+          <button class="secondaryKey" id="equal">=</button>
+        </div>
+      </div>
     </div>
   </div>
- 
+
   <script src="javascript.js"></script>
 </body>
 </html>
