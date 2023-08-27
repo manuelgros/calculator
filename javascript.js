@@ -9,13 +9,19 @@ function multiply(a, b) {
   return total = a * b;
 }
 function divide(a, b) {
-  return total = a / b;
+  if (a == 0 || b == 0) { 
+    return "We both know that's BS"; 
+  } else { 
+    return total = a / b;
+  }
 }
 
+
 // Variables and function for calculation
-let numberA
-let numberB
-let operator
+let operantA = "";
+let operantB = "";
+let operator = "";
+let result = "";
 
 function operate(a, b, o) {
   return (o == 'add') ? add(a, b)
@@ -25,24 +31,61 @@ function operate(a, b, o) {
     : "Error";
 }
 
+
 // Display feature
 const display = document.querySelector("#display");
-display.textContent = ""
+display.textContent = "";
 
 const numberBtn = document.querySelectorAll(".numberKey");
 for (i = 0; i < numberBtn.length; i++) {
   numberBtn[i].addEventListener('click', (e) => {
+    if (display.textContent == result) { clearDisplay() };
     display.textContent += e.target.id ;
   })
 }
 
-// Clear button
+
+// Operator buttons
+const operatorBtn = document.querySelectorAll(".operatorKey");
+for (i = 0; i < operatorBtn.length; i++) {
+  operatorBtn[i].addEventListener ('click', function(e) {
+    if (!operator) {
+      operantA = parseInt(display.textContent);
+      operator = e.target.id
+      clearDisplay();
+    } else {
+      operantB = parseInt(display.textContent);
+      result = operate(operantA, operantB, operator);
+      display.textContent = result;
+      operator = e.target.id;
+      operantA = result;
+    }
+  })
+}
+  // Equal button
+const equalBtn = document.querySelector("#equal");
+equalBtn.addEventListener('click', () => {
+  if(!operantA) {
+    result = parseInt(display.textContent);
+    operantA = result;
+  } else {
+    operantB = parseInt(display.textContent);
+    result = operate(operantA, operantB, operator);
+    display.textContent = result;
+    operantA = result;
+    operator = "";
+  }
+})
+
+
+// Clear functions and button
 const clearBtn = document.querySelector('#clear');
+clearBtn.addEventListener ('click', clearAll);
 
 function clearAll () {
   display.textContent = "";
-  numberA = "";
-  numberB = "";
+  operantA = "";
+  operantB = "";
   operator = "";
 }
 
@@ -51,23 +94,3 @@ function clearDisplay() {
 }
 
 
-clearBtn.addEventListener ('click', clearAll);
-
-// Operator buttons
-const operatorBtn = document.querySelectorAll(".operatorKey");
-for (i = 0; i < operatorBtn.length; i++) {
-  operatorBtn[i].addEventListener('click', (e) =>{
-    operator = e.target.id
-    numberA = +display.textContent;
-    clearDisplay();
-    console.log(operator);
-  })
-}
-
-//Equal button
-const equalBtn = document.querySelector("#equal");
-equalBtn.addEventListener("click", () => {
-  numberB = display.textContent;
-  display.textContent = operate(+numberA, +numberB, operator);
-  numberA = display.textContent;
-})
