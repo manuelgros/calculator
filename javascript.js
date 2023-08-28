@@ -52,34 +52,38 @@ for (i = 0; i < numberBtn.length; i++) {
 // Operator buttons
 const operatorBtn = document.querySelectorAll(".operatorKey");
 for (i = 0; i < operatorBtn.length; i++) {
-  operatorBtn[i].addEventListener ('click', function(e) {
-    if (!operator) {
-      operantA = parseFloat(firstDisplay.textContent);
-      operator = e.target.id
-      clearDisplay();
-      if (secondDisplay.textContent.slice(-1) == '=') {
-        secondDisplay.textContent = result + e.target.textContent;
-      } else {
-        secondDisplay.textContent += operantA + e.target.textContent
-      } 
+  operatorBtn[i].addEventListener ('click', calculate)
+} 
+function calculate(e) {
+  if (!operator) {
+    operantA = parseFloat(firstDisplay.textContent);
+    operator = e.target.id
+    clearDisplay();
+    if (secondDisplay.textContent.slice(-1) == '=') {
+      secondDisplay.textContent = result + e.target.textContent;
     } else {
-      operantB = parseFloat(firstDisplay.textContent);
-      result = +operate(operantA, operantB, operator).toFixed(5);
-      // firstDisplay.textContent = result;
-      clearDisplay();
-      operator = e.target.id;
-      operantA = result;
-      if (secondDisplay.textContent.slice(-1) == '=') {
-        secondDisplay.textContent = result + e.target.textContent;
-      } else {
-        secondDisplay.textContent += operantB + e.target.textContent;
-      }
+      secondDisplay.textContent += operantA + e.target.textContent
+    } 
+  } else {
+    operantB = parseFloat(firstDisplay.textContent);
+    result = +operate(operantA, operantB, operator).toFixed(5);
+    // firstDisplay.textContent = result;
+    clearDisplay();
+    operator = e.target.id;
+    operantA = result;
+    if (secondDisplay.textContent.slice(-1) == '=') {
+      secondDisplay.textContent = result + e.target.textContent;
+    } else {
+      secondDisplay.textContent += operantB + e.target.textContent;
     }
-  })
+  }
 }
+
   // Equal button
 const equalBtn = document.querySelector("#equal");
-equalBtn.addEventListener('click', () => {
+equalBtn.addEventListener('click', equal);
+
+function equal() {
   if(!operantA) {
     result = parseFloat(firstDisplay.textContent);
     operantA = result;
@@ -91,7 +95,7 @@ equalBtn.addEventListener('click', () => {
     operantA = result;
     operator = "";
   }
-})
+}
 
 
 // Clear functions and button
@@ -135,4 +139,24 @@ dotBtn.addEventListener('click', () => {
   if (firstDisplay.textContent % 1 == 0) {
     firstDisplay.textContent += '.';
   }
+})
+
+
+// Keyboard support
+const numberKeys = [...Array(10).keys()];
+const NumberBtnArray = Array.from(numberBtn).reverse();
+
+document.addEventListener('keydown', (e) => {
+  e.preventDefault();
+  for (i = 0; i < numberKeys.length; i++) {
+    if(e.key == `${numberKeys[i]}`) {NumberBtnArray[i].click()};
+  }
+  if(e.key == '+') { document.querySelector('#add').click() };
+  if(e.key == '-') { document.querySelector('#subtract').click() };
+  if(e.key == '*') { document.querySelector('#multiply').click() };
+  if(e.key == '/') { document.querySelector('#divide').click() };
+  if(e.key == '.') { dotBtn.click() };
+  if(e.key == 'Enter') { document.querySelector('#equal').click() };
+  if(e.key == 'Backspace') { deleteBtn.click() };
+  if(e.key == 'Escape') { clearBtn.click() };
 })
