@@ -50,13 +50,14 @@ const operatorBtn = document.querySelectorAll(".operatorKey");
 for (i = 0; i < operatorBtn.length; i++) {
   operatorBtn[i].addEventListener ('click', function(e) {
     if (!operator) {
-      operantA = parseInt(display.textContent);
+      operantA = parseFloat(display.textContent);
       operator = e.target.id
       clearDisplay();
     } else {
-      operantB = parseInt(display.textContent);
+      operantB = parseFloat(display.textContent);
       result = operate(operantA, operantB, operator);
-      display.textContent = result;
+      resultRounded = +result.toFixed(5);
+      display.textContent = resultRounded;
       operator = e.target.id;
       operantA = result;
     }
@@ -66,12 +67,13 @@ for (i = 0; i < operatorBtn.length; i++) {
 const equalBtn = document.querySelector("#equal");
 equalBtn.addEventListener('click', () => {
   if(!operantA) {
-    result = parseInt(display.textContent);
+    result = parseFloat(display.textContent);
     operantA = result;
   } else {
-    operantB = parseInt(display.textContent);
+    operantB = parseFloat(display.textContent);
     result = operate(operantA, operantB, operator);
-    display.textContent = result;
+    resultRounded = +result.toFixed(5);
+    display.textContent = resultRounded;
     operantA = result;
     operator = "";
   }
@@ -111,3 +113,12 @@ const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', () => {
   display.textContent = display.textContent.slice(0, -1);
 });
+
+
+// Punctuation button
+const dotBtn = document.querySelector('#dot');
+dotBtn.addEventListener('click', () => {
+  if (display.textContent % 1 == 0) {
+    display.textContent += '.';
+  }
+})
