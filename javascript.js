@@ -33,16 +33,20 @@ function operate(a, b, o) {
 
 
 // Display feature
-const display = document.querySelector("#display");
-display.textContent = "";
+const firstDisplay = document.querySelector("#firstDisplay");
+const secondDisplay = document.querySelector('#secondDisplay');
+firstDisplay.textContent = "";
+secondDisplay.textContent = "";
 
 const numberBtn = document.querySelectorAll(".numberKey");
 for (i = 0; i < numberBtn.length; i++) {
   numberBtn[i].addEventListener('click', (e) => {
-    if (display.textContent == result) { clearDisplay() };
-    display.textContent += e.target.id ;
+    if (firstDisplay.textContent == result) { clearDisplay() };
+    firstDisplay.textContent += e.target.id ;
+    secondDisplay.textContent += e.target.id
   })
 }
+
 
 
 // Operator buttons
@@ -50,16 +54,25 @@ const operatorBtn = document.querySelectorAll(".operatorKey");
 for (i = 0; i < operatorBtn.length; i++) {
   operatorBtn[i].addEventListener ('click', function(e) {
     if (!operator) {
-      operantA = parseFloat(display.textContent);
+      operantA = parseFloat(firstDisplay.textContent);
       operator = e.target.id
       clearDisplay();
+      if (secondDisplay.textContent.slice(-1) == '=') {
+        secondDisplay.textContent = result + e.target.textContent;
+      } else {
+        secondDisplay.textContent += e.target.textContent
+      } 
     } else {
-      operantB = parseFloat(display.textContent);
-      result = operate(operantA, operantB, operator);
-      resultRounded = +result.toFixed(5);
-      display.textContent = resultRounded;
+      operantB = parseFloat(firstDisplay.textContent);
+      result = +operate(operantA, operantB, operator).toFixed(5);
+      firstDisplay.textContent = result;
       operator = e.target.id;
       operantA = result;
+      if (secondDisplay.textContent.slice(-1) == '=') {
+        secondDisplay.textContent = result + e.target.textContent;
+      } else {
+        secondDisplay.textContent += e.target.textContent;
+      }
     }
   })
 }
@@ -67,13 +80,13 @@ for (i = 0; i < operatorBtn.length; i++) {
 const equalBtn = document.querySelector("#equal");
 equalBtn.addEventListener('click', () => {
   if(!operantA) {
-    result = parseFloat(display.textContent);
+    result = parseFloat(firstDisplay.textContent);
     operantA = result;
   } else {
-    operantB = parseFloat(display.textContent);
-    result = operate(operantA, operantB, operator);
-    resultRounded = +result.toFixed(5);
-    display.textContent = resultRounded;
+    operantB = parseFloat(firstDisplay.textContent);
+    result = +operate(operantA, operantB, operator).toFixed(5);
+    firstDisplay.textContent = result;
+    secondDisplay.textContent += '='
     operantA = result;
     operator = "";
   }
@@ -85,14 +98,15 @@ const clearBtn = document.querySelector('#clear');
 clearBtn.addEventListener ('click', clearAll);
 
 function clearAll () {
-  display.textContent = "";
+  firstDisplay.textContent = "";
+  secondDisplay.textContent = "";
   operantA = "";
   operantB = "";
   operator = "";
 }
 
 function clearDisplay() {
-  display.textContent = "";
+  firstDisplay.textContent = "";
 }
 
 
@@ -100,10 +114,10 @@ function clearDisplay() {
 const convertBtn = document.querySelector('#plusMinus');
 convertBtn.addEventListener('click', () => {
   let convertedNr
-  if (parseInt(display.textContent) > 0) {
-    display.textContent = '-'+display.textContent;
+  if (parseInt(firstDisplay.textContent) > 0) {
+    firstDisplay.textContent = '-'+firstDisplay.textContent;
   } else {
-    display.textContent = display.textContent.substring(1)
+    firstDisplay.textContent = firstDisplay.textContent.substring(1)
   }
 })
 
@@ -111,14 +125,14 @@ convertBtn.addEventListener('click', () => {
 // Delete button
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', () => {
-  display.textContent = display.textContent.slice(0, -1);
+  firstDisplay.textContent = firstDisplay.textContent.slice(0, -1);
 });
 
 
 // Punctuation button
 const dotBtn = document.querySelector('#dot');
 dotBtn.addEventListener('click', () => {
-  if (display.textContent % 1 == 0) {
-    display.textContent += '.';
+  if (firstDisplay.textContent % 1 == 0) {
+    firstDisplay.textContent += '.';
   }
 })
