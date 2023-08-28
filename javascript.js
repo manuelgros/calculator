@@ -43,7 +43,7 @@ for (i = 0; i < numberBtn.length; i++) {
   numberBtn[i].addEventListener('click', (e) => {
     if (firstDisplay.textContent == result) { clearDisplay() };
     firstDisplay.textContent += e.target.id ;
-    secondDisplay.textContent += e.target.id
+    // secondDisplay.textContent += e.target.id
   })
 }
 
@@ -60,7 +60,7 @@ for (i = 0; i < operatorBtn.length; i++) {
       if (secondDisplay.textContent.slice(-1) == '=') {
         secondDisplay.textContent = result + e.target.textContent;
       } else {
-        secondDisplay.textContent += e.target.textContent
+        secondDisplay.textContent += operantA + e.target.textContent
       } 
     } else {
       operantB = parseFloat(firstDisplay.textContent);
@@ -71,7 +71,7 @@ for (i = 0; i < operatorBtn.length; i++) {
       if (secondDisplay.textContent.slice(-1) == '=') {
         secondDisplay.textContent = result + e.target.textContent;
       } else {
-        secondDisplay.textContent += e.target.textContent;
+        secondDisplay.textContent += operantB + e.target.textContent;
       }
     }
   })
@@ -86,7 +86,7 @@ equalBtn.addEventListener('click', () => {
     operantB = parseFloat(firstDisplay.textContent);
     result = +operate(operantA, operantB, operator).toFixed(5);
     firstDisplay.textContent = result;
-    secondDisplay.textContent += '='
+    secondDisplay.textContent += operantB + '='
     operantA = result;
     operator = "";
   }
@@ -117,7 +117,7 @@ convertBtn.addEventListener('click', () => {
   if (parseInt(firstDisplay.textContent) > 0) {
     firstDisplay.textContent = '-'+firstDisplay.textContent;
   } else {
-    firstDisplay.textContent = firstDisplay.textContent.substring(1)
+    firstDisplay.textContent = firstDisplay.textContent.substring(1);
   }
 })
 
