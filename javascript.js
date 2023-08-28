@@ -10,7 +10,7 @@ function multiply(a, b) {
 }
 function divide(a, b) {
   if (a == 0 || b == 0) { 
-    return "We both know that's BS"; 
+    return "Aren't you a rascal"; 
   } else { 
     return total = a / b;
   }
@@ -93,4 +93,15 @@ function clearDisplay() {
   display.textContent = "";
 }
 
+
+// Positive/Negative number button
+const convertBtn = document.querySelector('#plusMinus');
+convertBtn.addEventListener('click', () => {
+  let convertedNr
+  if (parseInt(display.textContent) > 0) {
+    display.textContent = '-'+display.textContent;
+  } else {
+    display.textContent = display.textContent.substring(1)
+  }
+})
 
