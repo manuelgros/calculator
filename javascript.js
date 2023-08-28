@@ -65,7 +65,8 @@ for (i = 0; i < operatorBtn.length; i++) {
     } else {
       operantB = parseFloat(firstDisplay.textContent);
       result = +operate(operantA, operantB, operator).toFixed(5);
-      firstDisplay.textContent = result;
+      // firstDisplay.textContent = result;
+      clearDisplay();
       operator = e.target.id;
       operantA = result;
       if (secondDisplay.textContent.slice(-1) == '=') {
