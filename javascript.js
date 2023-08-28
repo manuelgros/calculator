@@ -113,7 +113,6 @@ function clearDisplay() {
 // Positive/Negative number button
 const convertBtn = document.querySelector('#plusMinus');
 convertBtn.addEventListener('click', () => {
-  let convertedNr
   if (parseInt(firstDisplay.textContent) > 0) {
     firstDisplay.textContent = '-'+firstDisplay.textContent;
   } else {
