@@ -79,6 +79,10 @@
   background-color: rgb(60, 60, 74)
 }
 
+#divide {
+  font-size: larger;
+}
+
 
 #operatorPadOne {
   display: flex;
